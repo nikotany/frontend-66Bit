@@ -1,0 +1,12 @@
+.gitignore
+.npmignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+docs/EmployeeApi.md
+docs/Gender.md
+docs/Position.md
+docs/Technology.md
+git_push.sh
+index.ts

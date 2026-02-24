@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: Employees
+  version: '1.0'
+paths:
+  /api/Employee/{id}:
+    get:
+      tags:
+        - Employee
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+  /api/Employee:
+    get:
+      tags:
+        - Employee
+      parameters:
+        - name: Page
+          in: query
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: Count
+          in: query
+          schema:
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+            format: int32
+        - name: Name
+          in: query
+          schema:
+            type: string
+        - name: Gender
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Gender'
+        - name: Position
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Position'
+        - name: Stack
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Technology'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    Gender:
+      enum:
+        - Male
+        - Female
+      type: string
+    Position:
+      enum:
+        - Frontend
+        - Backend
+        - Analyst
+        - Manager
+        - Designer
+      type: string
+    Technology:
+      enum:
+        - CSharp
+        - React
+        - Java
+        - PHP
+        - Figma
+        - Word
+      type: string
