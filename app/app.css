@@ -1,15 +1,87 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 3840px;
+  --breakpoint-xs: 320px;
+
+  --shadow-custom: 0px 4px 8px 0px rgba(57,113,164,0.25);
+}
+
+:root {
+  --color-bg: #FFFFFF;
+  --color-surface: #F2F2F2;
+  --color-text: #292929;
+}
+
+html.dark {
+  --color-bg: #292929;
+  --color-surface: #3E3E3E;
+  --color-text: #F5F5F5;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+@layer base {
+    html {
+        font-family: 'Raleway', sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1;
+        color: #292929;
+        background-color: #FFFFFF;
+    }
+    body {
+        margin: 0;
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    }
+}
+
+@layer components {
+  .checkbox-custom {
+    @apply appearance-none w-[19px] h-[19px] border border-[#155DA4] rounded-[2px] cursor-pointer relative transition-all duration-300;
+  }
+
+  .checkbox-custom:checked {
+    @apply bg-[#155DA4]
+  }
+
+  .checkbox-custom:checked::after {
+    content: '';
+    @apply absolute left-[5px] top-[1px] w-[6px] h-[10px] border-white border-0 border-b-2 border-r-2 rotate-45;
+  }
+}
+
+html.dark .bg-\[\#FFFFFF\] {
+  background-color: #292929 !important;
+}
+
+html.dark .bg-\[\#F2F2F2\] {
+  background-color: #3E3E3E !important;
+}
+
+html.dark .text-\[\#292929\] {
+  color: #F5F5F5 !important;
+}
+
+.layout-shell {
+  width: 100%;
+  padding-inline: max(16px, calc((100vw - 1560px) / 2));
+}
+
+.filter-icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }

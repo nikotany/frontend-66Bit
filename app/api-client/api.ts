@@ -23,6 +23,29 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
+export interface Employee {
+    'id': number;
+    'name': string;
+    'photo': string;
+    'phone': string;
+    /**
+     * Localized gender label (e.g. \"Мужчина\", \"Женщина\")
+     */
+    'gender': string;
+    /**
+     * Localized position label (e.g. \"Frontend-разработчик\")
+     */
+    'position': string;
+    'stack': Array<string>;
+    /**
+     * Localized date string
+     */
+    'birthdate': string;
+    /**
+     * Localized date string
+     */
+    'dateOfEmployment': string;
+}
 
 export const Gender = {
     Male: 'Male',
@@ -111,6 +134,7 @@ export const EmployeeApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['Stack'] = stack;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -143,6 +167,7 @@ export const EmployeeApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -173,7 +198,7 @@ export const EmployeeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiEmployeeGet(page?: number, count?: number, name?: string, gender?: Array<Gender>, position?: Array<Position>, stack?: Array<Technology>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiEmployeeGet(page?: number, count?: number, name?: string, gender?: Array<Gender>, position?: Array<Position>, stack?: Array<Technology>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Employee>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiEmployeeGet(page, count, name, gender, position, stack, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EmployeeApi.apiEmployeeGet']?.[localVarOperationServerIndex]?.url;
@@ -185,7 +210,7 @@ export const EmployeeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiEmployeeIdGet(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiEmployeeIdGet(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Employee>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiEmployeeIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EmployeeApi.apiEmployeeIdGet']?.[localVarOperationServerIndex]?.url;
@@ -211,7 +236,7 @@ export const EmployeeApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiEmployeeGet(page?: number, count?: number, name?: string, gender?: Array<Gender>, position?: Array<Position>, stack?: Array<Technology>, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        apiEmployeeGet(page?: number, count?: number, name?: string, gender?: Array<Gender>, position?: Array<Position>, stack?: Array<Technology>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Employee>> {
             return localVarFp.apiEmployeeGet(page, count, name, gender, position, stack, options).then((request) => request(axios, basePath));
         },
         /**
@@ -220,7 +245,7 @@ export const EmployeeApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiEmployeeIdGet(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        apiEmployeeIdGet(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Employee> {
             return localVarFp.apiEmployeeIdGet(id, options).then((request) => request(axios, basePath));
         },
     };

@@ -17,6 +17,10 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
   /api/Employee:
     get:
       tags:
@@ -61,8 +65,53 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
 components:
   schemas:
+    Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        photo:
+          type: string
+          format: uri
+        phone:
+          type: string
+        gender:
+          type: string
+          description: Localized gender label (e.g. "Мужчина", "Женщина")
+        position:
+          type: string
+          description: Localized position label (e.g. "Frontend-разработчик")
+        stack:
+          type: array
+          items:
+            type: string
+        birthdate:
+          type: string
+          description: Localized date string
+        dateOfEmployment:
+          type: string
+          description: Localized date string
+      required:
+        - id
+        - name
+        - photo
+        - phone
+        - gender
+        - position
+        - stack
+        - birthdate
+        - dateOfEmployment
     Gender:
       enum:
         - Male

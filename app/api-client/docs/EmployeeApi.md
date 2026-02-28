@@ -8,7 +8,7 @@ All URIs are relative to *http://localhost*
 |[**apiEmployeeIdGet**](#apiemployeeidget) | **GET** /api/Employee/{id} | |
 
 # **apiEmployeeGet**
-> apiEmployeeGet()
+> Array<Employee> apiEmployeeGet()
 
 
 ### Example
@@ -53,7 +53,7 @@ const { status, data } = await apiInstance.apiEmployeeGet(
 
 ### Return type
 
-void (empty response body)
+**Array<Employee>**
 
 ### Authorization
 
@@ -62,7 +62,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -73,7 +73,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiEmployeeIdGet**
-> apiEmployeeIdGet()
+> Employee apiEmployeeIdGet()
 
 
 ### Example
@@ -103,7 +103,7 @@ const { status, data } = await apiInstance.apiEmployeeIdGet(
 
 ### Return type
 
-void (empty response body)
+**Employee**
 
 ### Authorization
 
@@ -112,7 +112,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details

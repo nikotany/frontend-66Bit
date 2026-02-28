@@ -4,6 +4,7 @@ api.ts
 base.ts
 common.ts
 configuration.ts
+docs/Employee.md
 docs/EmployeeApi.md
 docs/Gender.md
 docs/Position.md
