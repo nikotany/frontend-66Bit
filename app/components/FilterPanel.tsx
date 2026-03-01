@@ -143,58 +143,62 @@ const FilterPanel = () => {
     }
 
     return (
-        <div className='flex flex-col gap-7 bg-[#FFFFFF]'>
-            <div className='flex justify-between pt-4 items-center'>
-                <h1 className='text-[40px] font-bold'>Список сотрудников</h1>
-                <div className='flex gap-8'>
-                    <DropdownFilter 
-                        titleFilter='Должность' 
-                        options={EMPLOYEES_POSITION} 
-                        isOpen={openFilter === 'position'} 
-                        onToggle={() => handleFilterToggle('position')}
-                        selectedValues={filters.position}
-                        onFilterChange={(values) => handleFilterChange('position', values)}/>
-                    <DropdownFilter 
-                        titleFilter='Пол' 
-                        options={EMPLOYEES_GENDER} 
-                        isOpen={openFilter === 'gender'}
-                        onToggle={() => handleFilterToggle('gender')}
-                        selectedValues={filters.gender}
-                        onFilterChange={(values) => handleFilterChange('gender', values)}/>
-                    <DropdownFilter 
-                        titleFilter='Стек технологий' 
-                        options={EMPLOYEES_STACK} 
-                        isOpen={openFilter === 'stack'}
-                        onToggle={() => handleFilterToggle('stack')}
-                        selectedValues={filters.stack}
-                        onFilterChange={(values) => handleFilterChange('stack', values)}/>
-                </div>
-            </div>
-            <div>
-                <input 
-                className='w-full border-[0.5px] border-[#B0B0B0] rounded-[5px] p-2.5 cursor-pointer focus:border-[#155DA4] focus:placeholder:text-[#818181] outline-none '
-                type="text"
-                placeholder='Поиск'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown={handleKeyDown} />
-            </div>
-            <div className='bg-[#F2F2F2] py-[13px] flex justify-between items-center'>
-                <div className='flex gap-[40px] items-center'>
-                    <div className='text-sm font-medium'>Выбранные фильтры:</div>
-                    <div className='flex flex-wrap gap-[23px]'>
-                        {Object.keys(filters).map((key) => {
-                            const values = filters[key as keyof FilterState]
-                            return values.map((v) => (
-                                <button onClick={() => handleFilterClick(key as keyof FilterState, v)} key={`${key}-${v}`} className='flex gap-2.5 items-center p-2.5 bg-[#FFFFFF] rounded-[5px] text-[16px] cursor-pointer'>
-                                    {<Cancel />}
-                                    {getLabel(v)}
-                                </button>
-                            ))
-                        })}
+        <div className='flex flex-col gap-[16px] lg:gap-[28px] bg-[#FFFFFF]'>
+            <div className='layout-shell'>
+                <div className='grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] pt-4 gap-4 lg:items-center'>
+                    <h1 className='text-[20px] tracking-[0.02rem] lg:text-[40px] lg:tracking-normal font-bold lg:col-start-1 lg:row-start-1'>Список сотрудников</h1>
+                    <div className='lg:col-start-1 lg:col-span-3 lg:row-start-2'>
+                        <input 
+                        className='w-full border-[0.5px] placeholder:text-[#B0B0B0] border-[#B0B0B0] rounded-[5px] p-[10px] cursor-pointer focus:border-[#155DA4] focus:placeholder:text-[#818181] outline-none text-[12px] text-[#818181] lg:text-[20px] font-normal'
+                        type="text"
+                        placeholder='Поиск'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        onKeyDown={handleKeyDown} />
+                    </div>
+                    <div className='flex gap-[12px] lg:gap-[32px] lg:col-start-3 lg:row-start-1'>
+                        <DropdownFilter 
+                            titleFilter='Должность' 
+                            options={EMPLOYEES_POSITION} 
+                            isOpen={openFilter === 'position'} 
+                            onToggle={() => handleFilterToggle('position')}
+                            selectedValues={filters.position}
+                            onFilterChange={(values) => handleFilterChange('position', values)}/>
+                        <DropdownFilter 
+                            titleFilter='Пол' 
+                            options={EMPLOYEES_GENDER} 
+                            isOpen={openFilter === 'gender'}
+                            onToggle={() => handleFilterToggle('gender')}
+                            selectedValues={filters.gender}
+                            onFilterChange={(values) => handleFilterChange('gender', values)}/>
+                        <DropdownFilter 
+                            titleFilter='Стек технологий' 
+                            options={EMPLOYEES_STACK} 
+                            isOpen={openFilter === 'stack'}
+                            onToggle={() => handleFilterToggle('stack')}
+                            selectedValues={filters.stack}
+                            onFilterChange={(values) => handleFilterChange('stack', values)}/>
                     </div>
                 </div>
-                <Button content='Найти' onClick={handleFind} />
+            </div>
+            <div className='bg-[#F2F2F2] w-screen relative left-1/2 right-1/2 -mx-[50vw]'>
+                <div className='layout-shell py-[16px] sm:py-[13px] flex flex-col sm:flex-row gap-[16px] sm:justify-between sm:gap-0 items-start lg:items-center'>
+                    <div className='flex flex-col sm:flex-row gap-[12px] sm:gap-[40px] items-start lg:items-center'>
+                        <div className='text-[14px] lg:text-[20px] font-medium'>Выбранные фильтры:</div>
+                        <div className='flex flex-wrap gap-[23px]'>
+                            {Object.keys(filters).map((key) => {
+                                const values = filters[key as keyof FilterState]
+                                return values.map((v) => (
+                                    <button onClick={() => handleFilterClick(key as keyof FilterState, v)} key={`${key}-${v}`} className='flex gap-2.5 items-center p-[10px] bg-[#FFFFFF] rounded-[5px] text-[12px] font-normal lg:text-[16px] cursor-pointer'>
+                                        {<Cancel />}
+                                        {getLabel(v)}
+                                    </button>
+                                ))
+                            })}
+                        </div>
+                    </div>
+                    <Button content='Найти' onClick={handleFind} />
+                </div>
             </div>
         </div>
     )

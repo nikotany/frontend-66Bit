@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-2xl: 1750px;
   --breakpoint-3xl: 1920px;
   --breakpoint-4xl: 3840px;
   --breakpoint-xs: 320px;
+  --breakpoint-lg: 1024px;
 
   --shadow-custom: 0px 4px 8px 0px rgba(57,113,164,0.25);
 }
@@ -73,8 +75,9 @@ html.dark .text-\[\#292929\] {
 }
 
 .layout-shell {
+  box-sizing: border-box;
   width: 100%;
-  padding-inline: max(16px, calc((100vw - 1560px) / 2));
+  padding-inline: max(24px, calc((100vw - 1560px) / 2));
 }
 
 .filter-icon {

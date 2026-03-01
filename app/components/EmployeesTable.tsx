@@ -3,6 +3,7 @@ import { useNavigate } from "react-router"
 import type { Employee } from "~/api-client"
 import { useAppDispatch, useAppSelector } from "~/store/hooks"
 import { getEmployees } from "~/store/slices/employeesSlice"
+import { formatDate } from "~/utils/utils"
 
 const EmployeesTable = () => {
     const dispatch = useAppDispatch()
@@ -88,14 +89,15 @@ const EmployeesTable = () => {
     }
 
     return (
-        <div className='mt-1'>
-            <table className='w-full'>
+        <div className='mt-[20px] lg:mt-1'>
+            <div className='overflow-x-auto lg:overflow-x-visible'>
+            <table className='w-full min-w-max lg:min-w-full' style={{ borderCollapse: 'collapse' }}>
                 <thead >
                     <tr className="text-left">
-                        <th className="py-7 border-b border-b-[#F2F2F2] font-medium text-[20px] text-[#B0B0B0]">ФИО</th>
-                        <th className="py-7 border-b border-b-[#F2F2F2] font-medium text-[20px] text-[#B0B0B0]">Должность</th>
-                        <th className="py-7 border-b border-b-[#F2F2F2] font-medium text-[20px] text-[#B0B0B0]">Телефон</th>
-                        <th className="py-7 border-b border-b-[#F2F2F2] font-medium text-[20px] text-[#B0B0B0]">Дата рождения</th>
+                        <th className="py-[4px] lg:py-7 border-b border-b-[#F2F2F2] font-medium text-[10px] lg:text-[20px] text-[#B0B0B0] w-[100px] lg:w-auto max-w-[100px] lg:max-w-none overflow-hidden text-ellipsis whitespace-nowrap">ФИО</th>
+                        <th className="py-[4px] lg:py-7 border-b border-b-[#F2F2F2] font-medium text-[10px] lg:text-[20px] text-[#B0B0B0] w-[100px] lg:w-auto max-w-[100px] lg:max-w-none overflow-hidden text-ellipsis whitespace-nowrap">Должность</th>
+                        <th className="py-[4px] lg:py-7 border-b border-b-[#F2F2F2] font-medium text-[10px] lg:text-[20px] text-[#B0B0B0] w-[100px] lg:w-auto max-w-[100px] lg:max-w-none overflow-hidden text-ellipsis whitespace-nowrap">Телефон</th>
+                        <th className="py-[4px] lg:py-7 border-b border-b-[#F2F2F2] font-medium text-[10px] lg:text-[20px] text-[#B0B0B0] w-[100px] lg:w-auto max-w-[100px] lg:max-w-none overflow-hidden text-ellipsis whitespace-nowrap">Дата рождения</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,24 +108,20 @@ const EmployeesTable = () => {
                             className='text-left hover:bg-[#F2F2F2] cursor-pointer'
                             ref={index === employeeList.length - 1 ? lastEmployeeRef : null}
                         >
-                            <td className="py-7  border-b border-b-[#F2F2F2] text-[20px]">{employee.name}</td>
-                            <td className="py-7 border-b border-b-[#F2F2F2] text-[20px]">{employee.position}</td>
-                            <td className="py-7 border-b border-b-[#F2F2F2] text-[20px]">{employee.phone}</td>
-                            <td className="py-7 border-b border-b-[#F2F2F2] text-[20px]">{employee.birthdate}</td>
+                            <td className="py-[12px] pr-[28px] lg:pr-0 lg:py-[28px] border-b border-b-[#F2F2F2] text-[12px] lg:text-[20px] max-w-[120px] lg:max-w-none">{employee.name}</td>
+                            <td className="py-[12px] pr-[28px] lg:pr-0 lg:py-[28px] border-b border-b-[#F2F2F2] text-[12px] lg:text-[20px] max-w-[120px] lg:max-w-none ">{employee.position}</td>
+                            <td className="py-[12px] pr-[28px] lg:pr-0 lg:py-[28px] border-b border-b-[#F2F2F2] text-[12px] lg:text-[20px] max-w-[120px] lg:max-w-none text-nowrap">{employee.phone}</td>
+                            <td className="py-[12px] pr-[28px] lg:pr-0 lg:py-[28px] border-b border-b-[#F2F2F2] text-[12px] lg:text-[20px] max-w-[120px] lg:max-w-none overflow-hidden text-ellipsis">{formatDate(employee.birthdate || '')}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            </div>
             {status === 'loading' && employeeList.length > 0 && (
                 <div className="text-center py-8 text-[18px] text-[#292929] font-medium">
                     Загрузка...
                 </div>
             )}
-            {/* {!hasMore && employeeList.length > 0 && status !== 'loading' && (
-                <div className="text-center py-8 text-[16px] text-[#B0B0B0]">
-                    Больше сотрудников нет
-                </div>
-            )} */}
         </div>
     )
 }

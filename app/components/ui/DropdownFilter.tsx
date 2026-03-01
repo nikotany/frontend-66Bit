@@ -40,19 +40,19 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({titleFilter, options, is
 
     return (
         <div className="relative" ref={dropdownRef}>
-            <Button className={`${isOpen ? 'font-medium text-[#155DA4]' : 'text-[20px] text-[#292929]'} cursor-pointer`} onClick={onToggle} content={titleFilter} isImg image={isOpen ? <ListOpen className="filter-icon text-[#155DA4] dark:text-[#F5F5F5]"/> : <ListClose className="filter-icon text-[#155DA4] dark:text-[#F5F5F5]"/>}/>
+            <Button className={`${isOpen ? 'font-medium text-[12px] lg:text-[20px] text-[#155DA4]' : 'text-[12px] lg:text-[20px] text-[#292929]'} cursor-pointer`} onClick={onToggle} content={titleFilter} isImg image={isOpen ? <ListOpen className="filter-icon text-[#155DA4] dark:text-[#F5F5F5]"/> : <ListClose className="filter-icon text-[#155DA4] dark:text-[#F5F5F5]"/>}/>
 
             {isOpen && (
-                <div className="absolute top-full bg-[#FFFFFF] right-0 mt-2 p-5 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]  border-t border-t-[#155DA4] z-50">
+                <div className={`absolute top-full bg-[#FFFFFF] left-0 lg:right-0 mt-[7px] lg:mt-[8px] p-[20px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]  border-t border-t-[#155DA4] z-50 flex flex-col gap-[12px] lg:gap-[16px]`}>
                     {options.map((option) => {
                         const isChecked = selectedValues.includes(option.value)
                         
                         return (
                             <label 
                                 key={option.value} 
-                                className="flex items-center py-2 cursor-pointer justify-between gap-[38px]"
+                                className="flex items-center cursor-pointer justify-between gap-[38px]"
                             >
-                                <span className="text-sm text-nowrap">{option.label}</span>
+                                <span className="text-[12px] font-normal lg:text-[16px] text-nowrap">{option.label}</span>
                                 <div className="relative flex items-center">
                                     <input
                                         type="checkbox"

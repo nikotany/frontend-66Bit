@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '~/store/hooks'
 import { getEmployeeById } from '~/store/slices/employeesSlice'
+import { formatDate } from '~/utils/utils'
 
 const EmployeeData = () => {
     const dispatch = useAppDispatch()
@@ -68,33 +69,40 @@ const EmployeeData = () => {
     }
 
     return (
-        <div className='flex flex-col gap-10] mt-4'>
-            <div className='border-b border-b-[#F2F2F2] mt-4 pb-10 flex gap-[42px]'>
-                <img src={employeeData?.photo} alt={employeeData?.name} className='w-[163px] h-[163px] object-cover rounded-full'/>
-                <div className='flex flex-col gap-6'>
-                    <div className='flex flex-col gap-4'>
-                        <h1 className='font-bold text-[40px]'>{employeeData?.name}</h1>
-                        <span className='text-[24px] font-medium'>{employeeData?.position}</span>
-                    </div>
-                    <div className='flex gap-4 flex-wrap'>
-                        {employeeData?.stack.map((tech, index) => (
-                            <div className='bg-[#F2F2F2] py-2.5 rounded-[5px] text-[16px] px-4.5' key={`${tech}-${index}`}>{tech}</div>
-                        ))}
+        <div className='flex flex-col gap-[20px] lg:gap-10 mt-[12px] lg:mt-4'>
+            <div className='border-b border-b-[#F2F2F2] mt-4 pb-[20px] lg:pb-10'>
+                <div className='flex gap-[16px] lg:gap-[42px] items-center'>
+                    <img src={employeeData?.photo} alt={employeeData?.name} className='w-[100px] h-[100px] lg:w-[163px] lg:h-[163px] object-cover rounded-full'/>
+                    <div className='flex flex-col gap-4 lg:gap-6'>
+                        <div className='flex flex-col gap-2 lg:gap-4'>
+                            <h1 className='font-bold text-[20px] lg:text-[40px]'>{employeeData?.name}</h1>
+                            <span className='text-[16px] lg:text-[24px] font-medium'>{employeeData?.position}</span>
+                        </div>
+                        <div className='hidden lg:flex gap-4 flex-wrap'>
+                            {employeeData?.stack.map((tech, index) => (
+                                <div className='bg-[#F2F2F2] py-2.5 rounded-[5px] text-[16px] px-4' key={`${tech}-${index}`}>{tech}</div>
+                            ))}
+                        </div>
                     </div>
                 </div>
+                <div className='flex lg:hidden gap-[8px] lg:gap-4 flex-wrap mt-[12px] lg:mt-6'>
+                    {employeeData?.stack.map((tech, index) => (
+                        <div className='bg-[#F2F2F2] py-2.5 rounded-[5px] text-[12px] lg:text-[16px] px-4.5' key={`${tech}-${index}`}>{tech}</div>
+                    ))}
+                </div>
             </div>
-            <div className='flex flex-col gap-8'>
-                <h2 className='font-semibold text-[32px]'>Основная информация</h2>
-                <div className='flex gap-11'>
-                    <div className='flex flex-col gap-6'>
-                        <span className='text-[24px] font-medium'>Контактный телефон:</span>
-                        <span className='text-[24px] font-medium'>Дата рождения:</span>
-                        <span className='text-[24px] font-medium'>Дата устройства:</span>
+            <div className='flex flex-col gap-[16px] lg:gap-8'>
+                <h2 className='font-semibold text-[16px] lg:text-[32px]'>Основная информация</h2>
+                <div className='flex gap-[18px] lg:gap-11'>
+                    <div className='flex flex-col gap-[12px] lg:gap-6'>
+                        <span className='text-[14px] lg:text-[24px] font-medium text-nowrap'>Контактный телефон:</span>
+                        <span className='text-[14px] lg:text-[24px] font-medium'>Дата рождения:</span>
+                        <span className='text-[14px] lg:text-[24px] font-medium'>Дата устройства:</span>
                     </div>
-                    <div className='flex flex-col gap-6'>
-                        <span className='text-[24px] font-normal'>{employeeData?.phone}</span>
-                        <span className='text-[24px] font-normal'>{employeeData?.birthdate}</span>
-                        <span className='text-[24px] font-normal'>{employeeData?.dateOfEmployment}</span>
+                    <div className='flex flex-col gap-[12px] lg:gap-6'>
+                        <span className='text-[14px] lg:text-[24px] font-normal text-nowrap'>{employeeData?.phone}</span>
+                        <span className='text-[14px] lg:text-[24px] font-normal'>{formatDate(employeeData?.birthdate || '')}</span>
+                        <span className='text-[14px] lg:text-[24px] font-normal'>{formatDate(employeeData?.dateOfEmployment || '')}</span>
                     </div>
                 </div>
             </div>

@@ -30,12 +30,9 @@ const ThemeSwitch = () => {
         setTheme((currentTheme) => currentTheme === 'light' ? 'dark' : 'light')
     }
 
-    // Не рендерим иконку до монтирования, чтобы избежать hydration mismatch
     if (!mounted) {
         return (
-            <button className='cursor-pointer w-6 h-6'>
-                {/* Пустая кнопка с фиксированным размером */}
-            </button>
+            <button className='cursor-pointer w-6 h-6'></button>
         )
     }
 
@@ -45,9 +42,9 @@ const ThemeSwitch = () => {
             className='cursor-pointer'
         >
             {theme === 'light' ? (
-                <Moon className='xs:h-[0.8545]' />
+                <Moon className='w-[85.45%] lg:[w-full]' />
             ) : (
-                <Sun className='xs:h-[0.8545]'/>
+                <Sun className='w-[85.45%]'/>
             )}
         </button>
     )
