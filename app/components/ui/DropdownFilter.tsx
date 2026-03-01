@@ -43,7 +43,7 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({titleFilter, options, is
             <Button className={`${isOpen ? 'font-medium text-[12px] lg:text-[20px] text-[#155DA4]' : 'text-[12px] lg:text-[20px] text-[#292929]'} cursor-pointer`} onClick={onToggle} content={titleFilter} isImg image={isOpen ? <ListOpen className="filter-icon text-[#155DA4] dark:text-[#F5F5F5]"/> : <ListClose className="filter-icon text-[#155DA4] dark:text-[#F5F5F5]"/>}/>
 
             {isOpen && (
-                <div className={`absolute top-full bg-[#FFFFFF] left-0 lg:right-0 mt-[7px] lg:mt-[8px] p-[20px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]  border-t border-t-[#155DA4] z-50 flex flex-col gap-[12px] lg:gap-[16px]`}>
+                <div className={`absolute top-full bg-[#FFFFFF] left-0 lg:right-0 mt-[7px] lg:mt-[8px] p-[20px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]  border-t border-t-[#155DA4] z-50 flex flex-col gap-[12px] lg:gap-[16px] w-fit`}>
                     {options.map((option) => {
                         const isChecked = selectedValues.includes(option.value)
                         

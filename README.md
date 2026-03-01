@@ -1,87 +1,69 @@
-# Welcome to React Router!
+# Employees company
 
-A modern, production-ready template for building full-stack React applications using React Router.
+## Оглавление
+- [Представление](#представление)
+- [Функционал](#функционал)
+- [Стек](#стек)
+- [Запуск](#запуск)
+  - [Требования](#требования)
+  - [Установка зависимостей](#установка-зависимостей)
+  - [Запуск в режиме разработки](#запуск-в-режиме-разработки)
+  - [Сборка для продакшена](#сборка-для-продакшена)
+  - [Запуск собранного приложения](#запуск-собранного-приложения)
+  - [Дополнительные команды](#дополнительные-команды)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Представление
+Выполненное тестовое задание на направление Frontend-разработка представляет собой веб-приложение, позволяющее просматривать список сотрудников компании.
 
-## Features
+Выполнила: Николаева Татьяна Александровна
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Функционал
+- Адаптивная верстка. Работа веб-приложения на различных устройствах
+- Смена тем
+- - Поддежка светлой и темной темы
+- - Сохранение выбранной темы в LocalStorage для сохранения темы при перезагрузке страницы
+- Бесконечный список. Подгрузка сотрудников при пролистывании до конца
+- Фильтрация по должности/полу/стеку технологий, а также поиск по имени
+- Хранение и синхронизация состояния для сохранения результатов поиска
+- - Отображение фильтров в query-параметрах 
+- - Сохранение фильтров в LocalStorage
+- Обработка ошибок и крайних случаев
 
-## Getting Started
+## Стек
+- React v18
+- Redux Toolkit
+- Tailwind
+- React Router v7
 
-### Installation
-
-Install the dependencies:
-
+## Запуск
+### Установка зависимостей
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
-
+### Запуск в режиме разработки
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://127.0.0.1:5173`.
-
-## Building for Production
-
-Create a production build:
-
+### Сборка для продакшена
 ```bash
 npm run build
 ```
+Команда создаст оптимизированную версию приложения в папке `build/`
 
-## Deployment
+### Запуск собранного приложения
+```bash
+npm run start
+```
 
-### Docker Deployment
-
-To build and run using Docker:
+### Дополнительные команды
+```bash
+npm run typecheck
+```
+Проверка типов TypeScript
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+npm run genapi
 ```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Генерация API клиента из OpenAPI спецификации

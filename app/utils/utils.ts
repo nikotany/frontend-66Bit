@@ -16,6 +16,5 @@ const MONTHS = {
 export const formatDate = (dateStr: string): string => {
     const [day, monthName, year] = dateStr.split(' ')
     const month = MONTHS[monthName as keyof typeof MONTHS]
-    // return `${year}-${month}-${day.padStart(2, '0')}`
     return `${day.padStart(2, '0')}.${month}.${year}`
 }

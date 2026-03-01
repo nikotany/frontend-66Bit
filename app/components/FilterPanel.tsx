@@ -4,6 +4,7 @@ import DropdownFilter from './ui/DropdownFilter'
 import { EMPLOYEES_GENDER, EMPLOYEES_POSITION, EMPLOYEES_STACK } from '~/constans/filterConstans'
 import Button from './ui/Button';
 import Cancel from '../assets/cancel.svg?react';
+import CancelDarkTheme from '../assets/cancelDarkTheme.svg?react';
 import { useAppDispatch } from '~/store/hooks';
 import { getEmployees } from '~/store/slices/employeesSlice';
 import type { Gender, Position, Technology } from '~/api-client';
@@ -20,6 +21,7 @@ const FilterPanel = () => {
     const dispatch = useAppDispatch()
     const [, setSearchParams] = useSearchParams()
     const [openFilter, setOpenFilter] = useState<string | null>(null)
+    const [isDarkTheme, setIsDarkTheme] = useState(false)
     const [filters, setFilters] = useState<FilterState>({
         position: [],
         gender: [],
@@ -28,7 +30,19 @@ const FilterPanel = () => {
     const [name, setName] = useState<string>('')
     const [isInitialized, setIsInitialized] = useState(false)
 
-    // Функция для восстановления и применения сохраненных фильтров
+    useEffect(() => {
+        const checkTheme = () => {
+            setIsDarkTheme(document.documentElement.classList.contains('dark'))
+        }
+
+        checkTheme()
+
+        const observer = new MutationObserver(checkTheme)
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+        return () => observer.disconnect()
+    }, [])
+
     const applyLoadedFilters = (parsed: { position?: string[]; gender?: string[]; stack?: string[]; name?: string }) => {
         setFilters({
             position: parsed.position || [],
@@ -48,7 +62,6 @@ const FilterPanel = () => {
         
         dispatch(getEmployees(params))
         
-        // Обновляем URL
         const urlParams = new URLSearchParams()
         if (parsed.name) urlParams.set('name', parsed.name)
         if (parsed.position?.length) urlParams.set('position', parsed.position.join(','))
@@ -57,7 +70,6 @@ const FilterPanel = () => {
         setSearchParams(urlParams, { replace: true })
     }
 
-    // Восстановление фильтров из LocalStorage при монтировании
     useEffect(() => {
         const savedFilters = localStorage.getItem(FILTERS_STORAGE_KEY)
         
@@ -70,14 +82,12 @@ const FilterPanel = () => {
                 dispatch(getEmployees({page: 1, count: 10}))
             }
         } else {
-            // Если нет сохраненных фильтров, загружаем начальный список
             dispatch(getEmployees({page: 1, count: 10}))
         }
         
         setIsInitialized(true)
     }, [])
 
-    // Сохранение фильтров при изменении (БЕЗ запроса данных)
     useEffect(() => {
         if (!isInitialized) return
         
@@ -90,7 +100,6 @@ const FilterPanel = () => {
         
         localStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify(filtersToSave))
         
-        // Обновляем URL
         const urlParams = new URLSearchParams()
         if (name) urlParams.set('name', name)
         if (filters.position.length) urlParams.set('position', filters.position.join(','))
@@ -182,15 +191,15 @@ const FilterPanel = () => {
                 </div>
             </div>
             <div className='bg-[#F2F2F2] w-screen relative left-1/2 right-1/2 -mx-[50vw]'>
-                <div className='layout-shell py-[16px] sm:py-[13px] flex flex-col sm:flex-row gap-[16px] sm:justify-between sm:gap-0 items-start lg:items-center'>
-                    <div className='flex flex-col sm:flex-row gap-[12px] sm:gap-[40px] items-start lg:items-center'>
+                <div className='layout-shell py-[16px] sm:py-[13px] flex flex-col sm:flex-row gap-[16px] sm:justify-between sm:gap-0 items-start sm:items-center'>
+                    <div className='flex flex-col sm:flex-row gap-[12px] sm:gap-[40px] items-start sm:items-center'>
                         <div className='text-[14px] lg:text-[20px] font-medium'>Выбранные фильтры:</div>
                         <div className='flex flex-wrap gap-[23px]'>
                             {Object.keys(filters).map((key) => {
                                 const values = filters[key as keyof FilterState]
                                 return values.map((v) => (
                                     <button onClick={() => handleFilterClick(key as keyof FilterState, v)} key={`${key}-${v}`} className='flex gap-2.5 items-center p-[10px] bg-[#FFFFFF] rounded-[5px] text-[12px] font-normal lg:text-[16px] cursor-pointer'>
-                                        {<Cancel />}
+                                        {isDarkTheme ? <CancelDarkTheme /> : <Cancel />}
                                         {getLabel(v)}
                                     </button>
                                 ))

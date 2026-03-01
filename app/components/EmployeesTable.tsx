@@ -55,11 +55,11 @@ const EmployeesTable = () => {
     if (status === 'failed' && error) {
         return (
             <div className='mt-8'>
-                <div className='flex flex-col items-center justify-center py-20 gap-4'>
-                    <h2 className='text-[24px] font-semibold text-[#292929]'>Ошибка загрузки данных</h2>
+                <div className='flex flex-col items-center justify-center py-4 lg:py-20 gap-2 lg:gap-4'>
+                    <h2 className='text-[14px] lg:text-[24px] font-semibold text-[#292929]'>Ошибка загрузки данных</h2>
                     <button
                         onClick={() => dispatch(getEmployees({ page: 1, count: 10 }))}
-                        className='mt-4 px-6 py-2 bg-[#155DA4] text-white text-[16px] font-medium rounded-[5px] hover:bg-[#0f4a87] transition-colors cursor-pointer'
+                        className='mt-2 lg:mt-4 px-6 py-2 bg-[#155DA4] text-white text-[10px] lg:text-[16px] font-medium rounded-[5px] hover:bg-[#0f4a87] transition-colors cursor-pointer'
                     >
                         Попробовать снова
                     </button>
@@ -71,7 +71,7 @@ const EmployeesTable = () => {
     if (status === 'succeeded' && employeeList.length === 0) {
         return (
             <div>
-                <p className='text-[18px] text-[#B0B0B0] text-center mt-25'>
+                <p className='text-[12px] lg:text-[18px] text-[#B0B0B0] text-center mt-4 lg:mt-25'>
                     По выбранным фильтрам не найдено ни одного сотрудника. Попробуйте изменить параметры поиска.
                 </p>
             </div>
@@ -81,7 +81,7 @@ const EmployeesTable = () => {
     if (status === 'loading' && employeeList.length === 0) {
         return (
             <div className='mt-8'>
-                <div className="text-center py-20 text-[18px] text-[#B0B0B0] font-medium">
+                <div className="text-center py-4 lg:py-20 text-[12px] lg:text-[18px] text-[#B0B0B0] font-medium">
                     Загрузка...
                 </div>
             </div>
@@ -105,7 +105,10 @@ const EmployeesTable = () => {
                         <tr 
                             key={employee.id} 
                             onClick={() => hadnleRowTableClick(employee.id)} 
-                            className='text-left hover:bg-[#F2F2F2] cursor-pointer'
+                            className='text-left cursor-pointer'
+                            style={{ '--hover-bg': 'var(--color-surface)' } as React.CSSProperties}
+                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-surface)'}
+                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                             ref={index === employeeList.length - 1 ? lastEmployeeRef : null}
                         >
                             <td className="py-[12px] pr-[28px] lg:pr-0 lg:py-[28px] border-b border-b-[#F2F2F2] text-[12px] lg:text-[20px] max-w-[120px] lg:max-w-none">{employee.name}</td>
@@ -118,7 +121,7 @@ const EmployeesTable = () => {
             </table>
             </div>
             {status === 'loading' && employeeList.length > 0 && (
-                <div className="text-center py-8 text-[18px] text-[#292929] font-medium">
+                <div className="text-center py-8 text-[12px] lg:text-[18px] text-[#292929] font-medium">
                     Загрузка...
                 </div>
             )}

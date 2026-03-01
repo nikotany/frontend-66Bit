@@ -21,7 +21,7 @@ const EmployeeData = () => {
     if (status === 'loading') {
         return (
             <div className='flex justify-center items-center'>
-                <div className="text-center py-20 text-[18px] text-[#B0B0B0] font-medium">
+                <div className="text-center py-4 lg:py-20 text-[12px] lg:text-[18px] text-[#B0B0B0] font-medium">
                     Загрузка...
                 </div>
             </div>
@@ -30,18 +30,18 @@ const EmployeeData = () => {
 
     if (status === 'failed' && error) {
         return (
-            <div className='flex flex-col items-center justify-center min-h-[60vh] gap-8'>
-                <h2 className='text-[32px] font-semibold text-[#292929]'>Ошибка загрузки данных</h2>
+            <div className='flex flex-col items-center justify-center min-h-[60vh] gap-4 lg:gap-8'>
+                <h2 className='text-[14px] lg:text-[32px] font-semibold text-[#292929]'>Ошибка загрузки данных</h2>
                 <div className='flex gap-4'>
                     <button
                         onClick={() => dispatch(getEmployeeById(Number(employeeId)))}
-                        className='px-6 py-3 bg-[#155DA4] text-white text-[16px] font-medium rounded-[5px] hover:bg-[#0f4a87] transition-colors cursor-pointer'
+                        className='px-3 py-1 lg:px-6 lg:py-3 bg-[#155DA4] text-[#FFFFFF] text-[12px] lg:text-[16px] font-medium rounded-[5px] hover:bg-[#0f4a87] transition-colors cursor-pointer'
                     >
                         Попробовать снова
                     </button>
                     <button
                         onClick={() => navigate('/')}
-                        className='px-6 py-3 border border-[#155DA4] text-[#155DA4] text-[16px] font-medium rounded-[5px] hover:bg-[#f5f5f5] transition-colors cursor-pointer'
+                        className='px-3 py-1 lg:px-6 lg:py-3 border border-[#155DA4] text-[#155DA4] text-[12px] lg:text-[16px] font-medium rounded-[5px] hover:bg-[#f5f5f5] transition-colors cursor-pointer'
                     >
                         Вернуться к списку
                     </button>
@@ -52,15 +52,14 @@ const EmployeeData = () => {
 
     if (status === 'succeeded' && !employeeData) {
         return (
-            <div className='flex flex-col items-center justify-center min-h-[60vh] gap-8'>
-                <div className='text-[64px]'>👤</div>
-                <h2 className='text-[32px] font-semibold text-[#292929]'>Сотрудник не найден</h2>
-                <p className='text-[18px] text-[#B0B0B0] text-center max-w-md'>
+            <div className='flex flex-col items-center justify-center min-h-[60vh] gap-4 lg:gap-8'>
+                <h2 className='text-[14px] lg:text-[32px] font-semibold text-[#292929]'>Сотрудник не найден</h2>
+                <p className='text-[12px] lg:text-[18px] text-[#B0B0B0] text-center max-w-md'>
                     К сожалению, сотрудник с ID {employeeId} не найден в системе
                 </p>
                 <button
                     onClick={() => navigate('/')}
-                    className='px-6 py-3 bg-[#155DA4] text-white text-[16px] font-medium rounded-[5px] hover:bg-[#0f4a87] transition-colors cursor-pointer'
+                    className='px-6 py-3 bg-[#155DA4] text-[#FFFFFF] text-[12px] lg:text-[16px] font-medium rounded-[5px] hover:bg-[#0f4a87] transition-colors cursor-pointer'
                 >
                     Вернуться к списку сотрудников
                 </button>
@@ -69,7 +68,7 @@ const EmployeeData = () => {
     }
 
     return (
-        <div className='flex flex-col gap-[20px] lg:gap-10 mt-[12px] lg:mt-4'>
+        <div className='flex flex-col gap-[20px] lg:gap-10 mt-[12px] lg:mt-4 pb-4 lg:pb-10'>
             <div className='border-b border-b-[#F2F2F2] mt-4 pb-[20px] lg:pb-10'>
                 <div className='flex gap-[16px] lg:gap-[42px] items-center'>
                     <img src={employeeData?.photo} alt={employeeData?.name} className='w-[100px] h-[100px] lg:w-[163px] lg:h-[163px] object-cover rounded-full'/>

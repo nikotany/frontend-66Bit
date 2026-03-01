@@ -95,7 +95,6 @@ const employeesSlice = createSlice({
                 const isAppend = action.meta.arg?.append;
                 
                 if (isAppend) {
-                    // Фильтруем дубликаты по ID
                     const existingIds = new Set(state.employeeList.map(emp => emp.id));
                     const newEmployees = action.payload.filter(emp => !existingIds.has(emp.id));
                     state.employeeList = [...state.employeeList, ...newEmployees];
